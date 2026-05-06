@@ -2,6 +2,7 @@
 addons/
 .godot/
 /android/
+/.idea/
 .import/
 .export/
 *.tmp
