@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://uwkjt4bp53ee"]
+
+[ext_resource type="Texture2D" uid="uid://ddrf1ngp32w8h" path="res://house128.png" id="1_glv2v"]
+[ext_resource type="Script" uid="uid://0stcoug3k7bm" path="res://main.gd" id="1_uu6xs"]
+[ext_resource type="Texture2D" uid="uid://b0wholmf8wehr" path="res://grass128.png" id="2_r0du0"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cm0pq"]
+texture = ExtResource("2_r0du0")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_fos0i"]
+tile_size = Vector2i(128, 128)
+sources/0 = SubResource("TileSetAtlasSource_cm0pq")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_uu6xs"]
+texture = ExtResource("1_glv2v")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_r0du0"]
+tile_size = Vector2i(128, 128)
+sources/1 = SubResource("TileSetAtlasSource_uu6xs")
+
+[node name="Node2D" type="Node2D" unique_id=280149238]
+script = ExtResource("1_uu6xs")
+
+[node name="GroundTileMapLayer" type="TileMapLayer" parent="." unique_id=38782571]
+tile_set = SubResource("TileSet_fos0i")
+
+[node name="BuildingTileMapLayer" type="TileMapLayer" parent="." unique_id=918297656]
+tile_set = SubResource("TileSet_r0du0")
+
+[node name="Timer" type="Timer" parent="." unique_id=1403126566]
+autostart = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1200798044]
+
+[node name="MoneyLabel" type="Label" parent="CanvasLayer" unique_id=25590121]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
