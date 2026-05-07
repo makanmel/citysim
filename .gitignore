@@ -8,3 +8,4 @@ addons/
 *.tmp
 *.log
 *.uid
+*.import

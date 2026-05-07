@@ -2,9 +2,9 @@ class_name CitizenManager
 extends Node
 
 const CITIZENS_PER_SPAWN: int = 1
-const SPAWN_INTERVAL: float = 5.0
-const SPAWN_CHANCE: float = 0.3  # 30% chance to spawn citizens each interval
-const DECREASE_CHANCE: float = 0.1  # 10% chance to decrease citizens each interval
+const SPAWN_INTERVAL: float = 1.0
+const SPAWN_CHANCE: float = 0.1  # chance to spawn citizens each interval
+const DECREASE_CHANCE: float = 0.08  # chance to decrease citizens each interval
 
 var placement_manager: PlacementManager
 var economy: EconomySystem
@@ -37,5 +37,5 @@ func try_spawn_citizens() -> void:
 			elif random_val < SPAWN_CHANCE + DECREASE_CHANCE:
 				economy.add_citizens_to_building(building_pos, CITIZENS_PER_SPAWN)
 
-func _on_building_placed(position: Vector2i) -> void:
+func _on_building_placed(_position: Vector2i) -> void:
 	pass

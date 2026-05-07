@@ -32,10 +32,8 @@ func can_place(pos: Vector2i, tool_type: int, economy) -> bool:
 	if tool_type == 3:  # ToolManager.ToolType.BULLDOZER
 		return can_bulldoze(pos)
 	
-	var tilemap: TileMapLayer = get_tilemap(tool_type)
-	
-	# Restrict placement to playground area (starting from 130px, which is x>=1 in tiles)
-	if pos.x < 1:
+	# Restrict placement to playground area (starting from 128px, which is x>=2 in 64px tiles)
+	if pos.x < 2:
 		placement_failed.emit("Cannot build in menu area")
 		return false
 	
@@ -126,7 +124,7 @@ func bulldoze(pos: Vector2i, economy) -> bool:
 	
 	return false
 
-func check_and_decrease_population(economy) -> void:
+func check_and_decrease_population(_economy) -> void:
 	for building_pos in buildings_positions:
 		if not has_road_nearby(building_pos):
 			# Building lost road access - mark as not roaded
@@ -174,10 +172,16 @@ func get_refund(pos: Vector2i) -> int:
 
 func has_road_nearby(pos: Vector2i) -> bool:
 	var neighbors: Array[Vector2i] = [
+		# Cardinal directions
 		pos + Vector2i(1, 0),
 		pos + Vector2i(-1, 0),
 		pos + Vector2i(0, 1),
-		pos + Vector2i(0, -1)
+		pos + Vector2i(0, -1),
+		# Diagonal directions (corners)
+		pos + Vector2i(1, 1),
+		pos + Vector2i(1, -1),
+		pos + Vector2i(-1, 1),
+		pos + Vector2i(-1, -1)
 	]
 	
 	for neighbor in neighbors:

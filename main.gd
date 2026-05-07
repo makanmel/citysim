@@ -18,11 +18,8 @@ var citizen_labels: Dictionary = {}  # Vector2i -> Node
 
 
 func _ready() -> void:
-	for x in range(-20, 20):
-		for y in range(-20, 20):
-			# Skip left column (x=0) where menu is
-			if x == 0:
-				continue
+	for x in range(-40, 40):
+		for y in range(-40, 40):
 			ground.set_cell(Vector2i(x, y), 0, Vector2i(0, 0))
 	
 	economy.income_received.connect(_on_income_received)
@@ -74,12 +71,12 @@ func _on_citizens_count_changed(count: int) -> void:
 
 func _on_citizens_added_to_building(pos: Vector2i, amount: int) -> void:
 	var world_pos: Vector2 = tilemap.map_to_local(pos)
-	world_pos += Vector2(-10, -28)  # Same position as citizen label
+	world_pos += Vector2(0, -14)  # Same position as citizen label
 	spawn_floating_text("+" + str(amount), world_pos, Color(0.3, 0.3, 1.0))
 
 func _on_citizens_removed_from_building(pos: Vector2i, amount: int) -> void:
 	var world_pos: Vector2 = tilemap.map_to_local(pos)
-	world_pos += Vector2(-10, -28)  # Same position as citizen label
+	world_pos += Vector2(0, -14)  # Same position as citizen label
 	spawn_floating_text("-" + str(amount), world_pos, Color(1.0, 0.3, 0.3), 0.5)  # Slower fade rate
 
 func format_money(value: int) -> String:
@@ -156,7 +153,7 @@ func spawn_floating_text(text: String, pos: Vector2, color: Color = Color.WHITE,
 func create_citizen_label(pos: Vector2i) -> void:
 	var label: Node = citizen_label_scene.instantiate()
 	var world_pos: Vector2 = tilemap.map_to_local(pos)
-	world_pos += Vector2(-10, -28)  # center of tile
+	world_pos += Vector2(0, -14)  # Adjusted position
 	label.global_position = world_pos
 	
 	if label.has_method("set_count"):
