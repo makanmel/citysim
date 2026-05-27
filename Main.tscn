@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://dr0nlgskc7sri" path="res://ui_controller.gd" id="6_ui"]
 [ext_resource type="Script" uid="uid://ccl3iddvfqv4j" path="res://citizen_manager.gd" id="7_citizens"]
 [ext_resource type="Script" uid="uid://hbb2xkwwwdkf" path="res://save_manager.gd" id="8_save"]
+[ext_resource type="Script" path="res://localization_manager.gd" id="9_localization"]
 [ext_resource type="Texture2D" uid="uid://dbq1sbuha3wpa" path="res://assets/64/road.png" id="8_trn2v"]
 [ext_resource type="Texture2D" uid="uid://cn1e0hwhatw60" path="res://assets/64/dozer.png" id="9_dozer"]
 [ext_resource type="Texture2D" uid="uid://c74pc7c5um1sw" path="res://assets/64/save.png" id="10_save"]
@@ -62,6 +63,9 @@ script = ExtResource("7_citizens")
 [node name="SaveManager" type="Node" parent="." unique_id=970770230]
 script = ExtResource("8_save")
 
+[node name="LocalizationManager" type="Node" parent="."]
+script = ExtResource("9_localization")
+
 [node name="GroundTileMapLayer" type="TileMapLayer" parent="." unique_id=38782571]
 tile_set = SubResource("TileSet_fos0i")
 
@@ -93,6 +97,8 @@ icon = ExtResource("1_glv2v")
 icon_alignment = 1
 vertical_icon_alignment = 0
 expand_icon = true
+autowrap_mode = 2
+theme_override_font_sizes/font_size = 10
 
 [node name="RoadButton" type="Button" parent="CanvasLayer/ToolPanel" unique_id=636139255]
 layout_mode = 0
@@ -106,6 +112,8 @@ icon = ExtResource("8_trn2v")
 icon_alignment = 1
 vertical_icon_alignment = 0
 expand_icon = true
+autowrap_mode = 2
+theme_override_font_sizes/font_size = 10
 
 [node name="BulldozerButton" type="Button" parent="CanvasLayer/ToolPanel" unique_id=1319840278]
 layout_mode = 0
@@ -119,6 +127,8 @@ icon = ExtResource("9_dozer")
 icon_alignment = 1
 vertical_icon_alignment = 0
 expand_icon = true
+autowrap_mode = 2
+theme_override_font_sizes/font_size = 10
 
 [node name="SaveButton" type="Button" parent="CanvasLayer/ToolPanel" unique_id=1234567890]
 layout_mode = 0
@@ -132,6 +142,8 @@ icon = ExtResource("10_save")
 icon_alignment = 1
 vertical_icon_alignment = 0
 expand_icon = true
+autowrap_mode = 2
+theme_override_font_sizes/font_size = 10
 
 [node name="LoadButton" type="Button" parent="CanvasLayer/ToolPanel" unique_id=1286608618]
 layout_mode = 0
@@ -145,6 +157,8 @@ icon = ExtResource("11_load")
 icon_alignment = 1
 vertical_icon_alignment = 0
 expand_icon = true
+autowrap_mode = 2
+theme_override_font_sizes/font_size = 10
 
 [node name="MoneyLabel" type="Label" parent="CanvasLayer" unique_id=25590121]
 offset_left = 3.0
@@ -152,7 +166,9 @@ offset_top = 2.0
 offset_right = 78.0
 offset_bottom = 25.0
 theme_override_colors/font_color = Color(1, 0.84, 0, 1)
+theme_override_font_sizes/font_size = 10
 text = "Money"
+autowrap_mode = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="MoneyValue" type="Label" parent="CanvasLayer" unique_id=25590122]
@@ -161,46 +177,61 @@ offset_top = 2.0
 offset_right = 125.0
 offset_bottom = 25.0
 theme_override_colors/font_color = Color(1, 0.84, 0, 1)
+theme_override_font_sizes/font_size = 10
 text = "0"
 horizontal_alignment = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="BuildingsLabel" type="Label" parent="CanvasLayer" unique_id=2099031934]
 offset_left = 3.0
-offset_top = 37.0
+offset_top = 30.0
 offset_right = 78.0
-offset_bottom = 60.0
+offset_bottom = 53.0
 theme_override_colors/font_color = Color(0.2, 0.8, 0.3, 1)
+theme_override_font_sizes/font_size = 10
 text = "Buildings"
+autowrap_mode = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="BuildingsValue" type="Label" parent="CanvasLayer" unique_id=2099031935]
 offset_left = 72.0
-offset_top = 37.0
+offset_top = 30.0
 offset_right = 125.0
-offset_bottom = 60.0
+offset_bottom = 53.0
 theme_override_colors/font_color = Color(0.2, 0.8, 0.3, 1)
+theme_override_font_sizes/font_size = 10
 text = "0"
 horizontal_alignment = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="CitizensLabel" type="Label" parent="CanvasLayer" unique_id=881678036]
 offset_left = 3.0
-offset_top = 72.0
+offset_top = 58.0
 offset_right = 78.0
-offset_bottom = 95.0
+offset_bottom = 81.0
 theme_override_colors/font_color = Color(0.3, 0.3, 1, 1)
+theme_override_font_sizes/font_size = 10
 text = "Citizens"
+autowrap_mode = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="CitizensValue" type="Label" parent="CanvasLayer" unique_id=881678037]
 offset_left = 72.0
-offset_top = 72.0
+offset_top = 58.0
 offset_right = 125.0
-offset_bottom = 95.0
+offset_bottom = 81.0
 theme_override_colors/font_color = Color(0.3, 0.3, 1, 1)
+theme_override_font_sizes/font_size = 10
 text = "0"
 horizontal_alignment = 2
 metadata/_edit_use_anchors_ = true
+
+[node name="LanguageButton" type="Button" parent="CanvasLayer" unique_id=1111111111]
+offset_left = 15.0
+offset_top = 90.0
+offset_right = 115.0
+offset_bottom = 115.0
+text = "UA/EN"
+theme_override_font_sizes/font_size = 10
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -13,6 +13,7 @@ extends Node2D
 @onready var buildings_value: Label = $CanvasLayer/BuildingsValue
 @onready var citizens_label: Label = $CanvasLayer/CitizensLabel
 @onready var citizens_value: Label = $CanvasLayer/CitizensValue
+@onready var localization: Node = $LocalizationManager
 
 var citizen_labels: Dictionary = {}  # Vector2i -> Node
 
@@ -30,6 +31,11 @@ func _ready() -> void:
 	economy.citizens_added_to_building.connect(_on_citizens_added_to_building)
 	economy.citizens_removed_from_building.connect(_on_citizens_removed_from_building)
 	placement_manager.placed.connect(_on_placed)
+	
+	localization.language_changed.connect(_on_language_changed)
+	$CanvasLayer/LanguageButton.pressed.connect(_on_language_button_pressed)
+	
+	update_ui_text()
 	placement_manager.building_removed.connect(_on_building_removed)
 	placement_manager.placement_failed.connect(_on_placement_failed)
 	
@@ -138,6 +144,31 @@ func _on_game_loaded() -> void:
 				var label: Node = citizen_labels[pos]
 				if label and label.has_method("set_count"):
 					label.set_count(count)
+
+func _on_language_button_pressed() -> void:
+	if localization.current_language == 0:  # LocalizationManager.Language.EN
+		localization.set_language(1)  # LocalizationManager.Language.UK
+	else:
+		localization.set_language(0)  # LocalizationManager.Language.EN
+
+func _on_language_changed(language: int) -> void:
+	update_ui_text()
+
+func update_ui_text() -> void:
+	money_label.text = localization.get_text("money")
+	buildings_label.text = localization.get_text("buildings")
+	citizens_label.text = localization.get_text("citizens")
+	
+	$CanvasLayer/ToolPanel/ResidentialButton.text = localization.get_text("residential")
+	$CanvasLayer/ToolPanel/ResidentialButton.tooltip_text = localization.get_text("residential_tooltip")
+	$CanvasLayer/ToolPanel/RoadButton.text = localization.get_text("stone_road")
+	$CanvasLayer/ToolPanel/RoadButton.tooltip_text = localization.get_text("stone_road_tooltip")
+	$CanvasLayer/ToolPanel/BulldozerButton.text = localization.get_text("bulldozer")
+	$CanvasLayer/ToolPanel/BulldozerButton.tooltip_text = localization.get_text("bulldozer_tooltip")
+	$CanvasLayer/ToolPanel/SaveButton.text = localization.get_text("save_game")
+	$CanvasLayer/ToolPanel/SaveButton.tooltip_text = localization.get_text("save_tooltip")
+	$CanvasLayer/ToolPanel/LoadButton.text = localization.get_text("load_game")
+	$CanvasLayer/ToolPanel/LoadButton.tooltip_text = localization.get_text("load_tooltip")
 
 
 func spawn_floating_text(text: String, pos: Vector2, color: Color = Color.WHITE, fade_rate: float = 1.5) -> void:

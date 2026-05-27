@@ -40,7 +40,8 @@ func save_game() -> void:
 		"buildings_positions": buildings_serialized,
 		"roads_positions": roads_serialized,
 		"citizens_per_building": citizens_serialized,
-		"current_tool": tool_manager.current_tool
+		"current_tool": tool_manager.current_tool,
+		"language": get_parent().get_node("LocalizationManager").current_language
 	}
 	
 	var file: FileAccess = FileAccess.open(SAVE_FILE_PATH, FileAccess.WRITE)
@@ -92,6 +93,11 @@ func apply_save_data(data: Dictionary) -> void:
 		economy.citizens_per_building[pos] = citizen_data.count
 	
 	tool_manager.current_tool = data.get("current_tool", tool_manager.ToolType.NONE)
+	
+	# Restore language preference
+	var localization = get_parent().get_node("LocalizationManager")
+	var saved_language = data.get("language", 0)  # Default to EN
+	localization.set_language(saved_language)
 	
 	# Rebuild tilemaps
 	rebuild_tilemaps()
